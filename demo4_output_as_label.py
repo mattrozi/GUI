@@ -26,7 +26,9 @@ class KILO_Converter:
 
         self.miles_variable = tkinter.StringVar()
 
-        self.miles_label = tkinter.Label(self.mid_frame, text=self.miles_variable)
+        self.miles_label = tkinter.Label(
+            self.mid_frame, textvariable=self.miles_variable
+        )
 
         self.descr_label.pack(side="left")
         self.miles_label.pack(side="left")
@@ -51,8 +53,7 @@ class KILO_Converter:
         kilo = float(self.kilo_entry.get())
 
         miles = round(kilo * 0.6214, 2)
-
-        self.miles_var.set(miles)
+        self.miles_variable.set(miles)
 
 
 kilo_conv = KILO_Converter()
