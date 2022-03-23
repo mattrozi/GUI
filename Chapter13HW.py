@@ -14,20 +14,20 @@ class Pizza_order:
 
         self.main_window.geometry("600x200")
         self.main_window.title("Pizza Delivery")
-        self.main_window.configure(bg='Red')
+        self.main_window.configure(bg='red')
 
-        self.name_frame = tkinter.Frame(self.main_window)
-        self.middle_frame = tkinter.Frame(self.main_window)
-        self.bottom_frame=tkinter.Frame(self.main_window)
+        self.name_frame = tkinter.Frame(self.main_window,bg='red')
+        self.middle_frame = tkinter.Frame(self.main_window,bg='red')
+        self.bottom_frame=tkinter.Frame(self.main_window,bg='red')
 
 
         self.prompt_label = tkinter.Label(
             self.name_frame, text="Enter a name for the order: "
         )
 
-        self.Toppings_label=tkinter.Label(self.middle_frame,text='Toppings:')
+        self.Toppings_label=tkinter.Label(self.middle_frame,text='Toppings:',bg='red',fg='white')
 
-        self.Crust_label=tkinter.Label(self.bottom_frame,text='Crust Options:')
+        self.Crust_label=tkinter.Label(self.bottom_frame,text='Crust Options:',bg='red',fg='white')
 
         self.customer_entry = tkinter.Entry(self.name_frame, width=20)
 
@@ -77,7 +77,7 @@ class Pizza_order:
         )
 
         self.topping6 = tkinter.Checkbutton(
-            self.middle_frame, text="Peppers", variable=self.topping6_var,
+            self.middle_frame, text="Peppers", variable=self.topping6_var
         )
 
         self.topping7 = tkinter.Checkbutton(
@@ -85,15 +85,15 @@ class Pizza_order:
         )
 
         self.rb1 = tkinter.Radiobutton(
-            self.bottom_frame, text="Regular Crust", variable=self.radio_var, value=5
+            self.bottom_frame, text="Regular Crust", variable=self.radio_var, value=1
         )
 
         self.rb2 = tkinter.Radiobutton(
-            self.bottom_frame, text="Thick Crust", variable=self.radio_var, value=10
+            self.bottom_frame, text="Thick Crust", variable=self.radio_var,value=2
         )
 
         self.rb3 = tkinter.Radiobutton(
-            self.bottom_frame, text="Detroit Style", variable=self.radio_var, value=15
+            self.bottom_frame, text="Detroit Style", variable=self.radio_var,value=3
         )
 
 
@@ -114,7 +114,7 @@ class Pizza_order:
 
 
         self.Calculation_button = tkinter.Button(
-            self.main_window, text="Calculate", command=self.do_something
+            self.main_window, text="Calculate", command=self.calc
         )
 
         self.quit_button = tkinter.Button(
@@ -123,7 +123,7 @@ class Pizza_order:
 
         self.name_frame.pack(side="top")
         self.middle_frame.pack(side='top')
-        self.bottom_frame.pack(side="top")
+        self.bottom_frame.pack(side='top')
 
         
         self.quit_button.pack(side="bottom")
@@ -131,35 +131,52 @@ class Pizza_order:
 
         tkinter.mainloop()
 
-    def do_something(self):
-        self.message = "The Toppings you have selected: \n"
+    def calc(self):
+        self.message = "The Pizza Options chosen are :   \n"
+        self.total=0
 
         if self.cb_var1.get() == 1:
-            self.message+=' Bacon \n'
+             self.message+=' Bacon \n'
+             self.total+=7
 
         if self.cb_var2.get() == 1:
             self.message+=' Pepporoni \n'
+            self.total+=8
 
         if self.cb_var3.get() == 1:
             self.message+=' Sausage \n'
+            self.total+=5
 
         if self.topping4_var.get() == 1:
             self.message+=' Onion \n'
+            self.total+=2
 
         if self.topping5_var.get() == 1:
             self.message+=' Olives \n'
+            self.total+=3
 
         if self.topping6_var.get() == 1:
             self.message+=' Peppers \n'
+            self.total+=2
 
         if self.topping7_var.get() == 1:
            self.message+=' Pineapple \n'
+           self.total+=5
 
-        tkinter.messagebox.showinfo("Order Receipt", self.message)
+        if self.radio_var.get()==1:
+            self.message+='Normal Crust \n'
+            self.total+=0
 
-    #def calculate_price(self):
-       # self.total_price=
+        if self.radio_var.get()==2:
+            self.message+='Thick Crust \n '
+            self.total+=1
 
+        if self.radio_var.get()==3:
+            self.message+='Detroit Crust \n '
+            self.total+=3
+           
+        tkinter.messagebox.showinfo("Order Receipt",self.message+'\n The Total cost of the order for: '+ self.customer_entry.get()
+        +'\n Comes out to a total of: $'+ str(self.total))
 
 my_order = Pizza_order()
 
